@@ -1,0 +1,51 @@
+using System;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        int[] a = {115,182,191,31,196,1099,5,172,10,179,83,21,20,21,186,177,195,193,188,199,62,109,105,183,110};
+
+        Array.Sort(a);
+        int n = a.Length;
+
+        double mean = a.Average();
+        double median = a[n/2];
+        int mode = a.GroupBy(x => x).OrderByDescending(g => g.Count()).First().Key;
+        double var = a.Select(x => Math.Pow(x - mean, 2)).Average();
+        double std = Math.Sqrt(var);
+
+        double q1 = a[n/4];
+        double q3 = a[(3*n)/4];
+        double iqr = q3 - q1;
+
+        double p20 = a[(int)(0.2*n)];
+        double p50 = median;
+
+        int range = a.Max() - a.Min();
+        int sum = a.Sum();
+
+        double low = q1 - 1.5*iqr;
+        double high = q3 + 1.5*iqr;
+
+        Console.WriteLine("Mean = " + mean);
+        Console.WriteLine("Mode = " + mode);
+        Console.WriteLine("Median = " + median);
+        Console.WriteLine("Variance = " + var);
+        Console.WriteLine("Std = " + std);
+        Console.WriteLine("P20 = " + p20);
+        Console.WriteLine("P50 = " + p50);
+        Console.WriteLine("Q1 = " + q1);
+        Console.WriteLine("Q2 = " + median);
+        Console.WriteLine("Q3 = " + q3);
+        Console.WriteLine("Range = " + range);
+        Console.WriteLine("IQR = " + iqr);
+        Console.WriteLine("Sum = " + sum);
+
+        Console.WriteLine("Outliers:");
+        foreach (int x in a)
+            if (x < low || x > high)
+                Console.WriteLine(x);
+    }
+}
