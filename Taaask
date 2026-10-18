@@ -1,0 +1,164 @@
+
+# 1. classify_triangle
+def classify_triangle(a, b, c):
+    if a == b and b == c:
+        return "Equilateral"
+    elif a == b or a == c or b == c:
+        return "Isosceles"
+    else:
+        return "Scalene"
+
+
+# 2. course_result
+def course_result(mark, attendance):
+    if mark >= 50 and attendance >= 75:
+        return "Pass"
+    else:
+        return "Fail"
+
+
+# 3. fizzbuzz
+def fizzbuzz(n):
+    for i in range(1, n + 1):
+        if i % 3 == 0 and i % 5 == 0:
+            print("FizzBuzz")
+        elif i % 3 == 0:
+            print("Fizz")
+        elif i % 5 == 0:
+            print("Buzz")
+        else:
+            print(i)
+
+
+# 4. is_prime
+def is_prime(n):
+    if n < 2:
+        return False
+
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+
+    return True
+
+
+# 5. primes_below
+def primes_below(n):
+    for i in range(2, n):
+        if is_prime(i):
+            print(i)
+
+
+# 6. first_repeated
+def first_repeated(values):
+    for i in range(len(values)):
+        for j in range(i + 1, len(values)):
+            if values[i] == values[j]:
+                return values[i]
+
+    return None
+
+
+# 7. count_pairs
+def count_pairs(n):
+    count = 0
+
+    for i in range(n):
+        for j in range(n):
+            count = count + 1
+
+    return count
+
+
+# 8. calculator
+def calculator(command):
+    parts = command.split()
+
+    a = float(parts[0])
+    op = parts[1]
+    b = float(parts[2])
+
+    if op == "+":
+        return a + b
+    elif op == "-":
+        return a - b
+    elif op == "*":
+        return a * b
+    elif op == "/":
+        if b != 0:
+            return a / b
+        else:
+            return "Error"
+
+
+# 9. parse_int
+def parse_int(text, default=None):
+    try:
+        return int(text)
+    except ValueError:
+        return default
+
+
+# 10. stats
+def stats(*numbers):
+    if len(numbers) == 0:
+        return None
+
+    smallest = numbers[0]
+    biggest = numbers[0]
+
+    for n in numbers:
+        if n < smallest:
+            smallest = n
+
+        if n > biggest:
+            biggest = n
+
+    return smallest, biggest
+
+
+# 11. append_to
+def append_to(item, target=None):
+    if target is None:
+        target = []
+
+    target.append(item)
+    return target
+
+
+# 12. make_multiplier
+def make_multiplier(k):
+    def multiply(n):
+        return n * k
+
+    return multiply
+
+
+# 13. apply_n
+def apply_n(f, x, n):
+    for i in range(n):
+        x = f(x)
+
+    return x
+
+
+def double(x):
+    return x * 2
+
+
+# Test the functions
+print("1.", classify_triangle(3, 3, 3))
+print("2.", course_result(70, 80))
+print("3. FizzBuzz:")
+fizzbuzz(15)
+print("4.", is_prime(7))
+print("5. Prime numbers:")
+primes_below(20)
+print("6.", first_repeated([1, 2, 3, 2, 4]))
+print("7.", count_pairs(3))
+print("8.", calculator("5 + 3"))
+print("9.", parse_int("123"))
+print("10.", stats(4, 2, 8, 1, 9))
+print("11.", append_to(5))
+print("12.", make_multiplier(2)(5))
+print("13.", apply_n(double, 2, 3))
